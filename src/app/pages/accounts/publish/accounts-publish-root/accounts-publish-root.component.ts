@@ -19,7 +19,7 @@ export class AccountsPublishRootComponent {
   constructor(private publishService: PublishService) {
     this.form = new FormGroup(
       {
-        texto: new FormControl('', [Validators.required]),
+        text: new FormControl('', [Validators.required]),
         x: new FormControl(false),
         instagram: new FormControl(false),
       },
@@ -28,10 +28,7 @@ export class AccountsPublishRootComponent {
   }
 
   async onSubmit() {
-    let texto = this.form.get('texto').value;
-    if (this.form.get('x').value) {
-      await this.publishService.postOnTwitter(texto);
-    }
+    await this.publishService.publish(this.form.value);
   }
 
   atLeastOneCheckedValidator(checkedFields: string[]): ValidatorFn {
