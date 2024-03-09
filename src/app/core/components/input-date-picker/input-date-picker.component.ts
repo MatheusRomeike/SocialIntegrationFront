@@ -16,8 +16,8 @@ import {
 } from '@angular/forms';
 import * as moment from 'moment';
 import { conformToMask } from 'text-mask-core';
-import { BaseCustomInputComponent } from '../base-custom-input/base-custom-input.component';
 import { applyColumn } from '../../utils/form-utils';
+import { BaseCustomInputComponent } from '../base-custom-input/base-custom-input.component';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
