@@ -1,0 +1,61 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Confirmação</h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        (click)="close()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <ng-container *ngTemplateOutlet="icone"></ng-container>
+      <p class="d-flex justify-content-center">{{ modalMessage }}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">
+        Não
+      </button>
+      <ng-container *ngTemplateOutlet="botaoSim"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #icone>
+  <div class="d-flex justify-content-center">
+    <app-icon class="icon" *ngIf="confirmableType === confirmar"
+      >check_circle</app-icon
+    >
+    <app-icon class="icon" *ngIf="confirmableType === deletar">delete</app-icon>
+    <app-icon class="icon" *ngIf="confirmableType === informar">info</app-icon>
+  </div>
+</ng-template>
+
+<ng-template #botaoSim>
+  <button
+    type="button"
+    class="btn btn-success"
+    *ngIf="confirmableType == confirmar"
+    (click)="confirm()"
+  >
+    Sim
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    *ngIf="confirmableType == deletar"
+    (click)="confirm()"
+  >
+    Sim
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    *ngIf="confirmableType == informar"
+    (click)="confirm()"
+  >
+    Sim
+  </button>
+</ng-template>
