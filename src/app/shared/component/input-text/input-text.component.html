@@ -96,7 +96,12 @@
     </div>
   </div>
 
-  <div *ngIf="!dropdownMenuItems" class="div-icon" (click)="iconAction()">
+  <div
+    *ngIf="!dropdownMenuItems"
+    class="div-icon"
+    (click)="iconAction()"
+    [style]="iconAction ? 'cursor: pointer;' : ''"
+  >
     <app-icon>{{ icon }}</app-icon>
   </div>
 </ng-template>

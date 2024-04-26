@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultLayoutComponent } from './core/layouts/default-layout/default-layout.component';
+import { DefaultLayoutComponent } from './shared/layouts/default-layout/default-layout.component';
 
 const routes: Routes = [
   {
@@ -22,6 +22,11 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginModule),
   },
 ];
 
