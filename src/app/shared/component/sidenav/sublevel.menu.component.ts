@@ -42,7 +42,7 @@ import { INavbarData, fadeInOut } from './helper';
         >
           <app-icon class="sublevel-link-icon">circle</app-icon>
           <span class="sublevel-link-text" @fadeInOut *ngIf="collapsed">{{
-            item.label
+            item.label | translate
           }}</span>
           <app-icon
             *ngIf="item.items && collapsed"
@@ -63,7 +63,7 @@ import { INavbarData, fadeInOut } from './helper';
         >
           <app-icon class="sublevel-link-icon">circle</app-icon>
           <span class="sublevel-link-text" @fadeInOut *ngIf="collapsed">{{
-            item.label
+            item.label | translate
           }}</span>
         </a>
         <div *ngIf="item.items && item.items.length > 0">

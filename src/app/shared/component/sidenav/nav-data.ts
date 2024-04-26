@@ -37,7 +37,7 @@ export const navbarData: INavbarData[] = [
         icon: 'person',
       },
       {
-        routeLink: 'settings/customize',
+        routeLink: 'login',
         label: 'Logout',
       },
     ],

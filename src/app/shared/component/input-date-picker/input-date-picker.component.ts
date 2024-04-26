@@ -41,13 +41,13 @@ export class InputDatePickerComponent
   extends BaseCustomInputComponent
   implements OnInit, AfterViewInit
 {
-  @Input() columnSize = 3;
+  @Input() columnSize: number | string = 3;
   @Input() label = '';
   @Input() disabled: boolean;
   @Input() id: string = '';
-  @Input() placeholder: string = 'dd/mm/aaaa';
   @Input() formControl: AbstractControl | null = null;
 
+  placeholder = this.getDatePattern(window.navigator.language);
   valueDisplay: any;
   required = false;
 
@@ -123,7 +123,7 @@ export class InputDatePickerComponent
     event.target.value = convert;
 
     if (convert.length == 10) {
-      const date = moment(convert, 'DD/MM/YYYY');
+      const date = moment(convert, this.placeholder);
       this.writeValue(date.toDate());
     }
   }
@@ -131,7 +131,6 @@ export class InputDatePickerComponent
   override writeValue(value) {
     if (value) {
       const date = new Date(value);
-      console.log(date);
       this.valueDisplay = {
         day: date.getDate(),
         month: date.getMonth() + 1,
@@ -157,12 +156,31 @@ export class InputDatePickerComponent
       this.valueDisplay = null;
       event.target.value = '';
     } else {
-      const date = moment(event.target.value, 'DD/MM/YYYY');
+      const date = moment(event.target.value, this.placeholder);
       this.writeValue(date.toDate());
     }
   }
 
   ngAfterViewInit(): void {
     applyColumn(this.id, this.columnSize);
+  }
+
+  getDatePattern(locale) {
+    var formatter = new Intl.DateTimeFormat(locale).formatToParts();
+
+    return formatter
+      .map(function (e) {
+        switch (e.type) {
+          case 'month':
+            return 'MM';
+          case 'day':
+            return 'DD';
+          case 'year':
+            return 'YYYY';
+          default:
+            return e.value;
+        }
+      })
+      .join('');
   }
 }

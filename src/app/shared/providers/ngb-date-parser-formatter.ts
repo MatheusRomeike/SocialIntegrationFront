@@ -1,68 +1,52 @@
+import { Injectable } from '@angular/core';
 import {
   NgbDateParserFormatter,
   NgbDateStruct,
 } from '@ng-bootstrap/ng-bootstrap';
-import { Injectable } from '@angular/core';
-import {
-  isNumber,
-  toInteger,
-  padNumber,
-} from '@ng-bootstrap/ng-bootstrap/util/util';
+import * as moment from 'moment';
 
-@Injectable()
-export class NgbDateCustomParserFormatter extends NgbDateParserFormatter {
+@Injectable({
+  providedIn: 'root',
+})
+export class NgbDateCustomParserFormatte extends NgbDateParserFormatter {
+  public placeholder = '';
+
+  constructor() {
+    super();
+    this.placeholder = this.getDatePattern(window.navigator.language);
+  }
+
+  getDatePattern(locale) {
+    var formatter = new Intl.DateTimeFormat(locale).formatToParts();
+
+    return formatter
+      .map(function (e) {
+        switch (e.type) {
+          case 'month':
+            return 'MM';
+          case 'day':
+            return 'DD';
+          case 'year':
+            return 'YYYY';
+          default:
+            return e.value;
+        }
+      })
+      .join('');
+  }
+
   parse(value: string): NgbDateStruct {
     if (value) {
-      const dateParts = value.trim().split('-');
-      if (dateParts.length === 1 && this.isNumber(dateParts[0])) {
-        return { day: this.toInteger(dateParts[0]), month: null, year: null };
-      } else if (
-        dateParts.length === 2 &&
-        this.isNumber(dateParts[0]) &&
-        this.isNumber(dateParts[1])
-      ) {
-        return {
-          day: this.toInteger(dateParts[0]),
-          month: this.toInteger(dateParts[1]),
-          year: null,
-        };
-      } else if (
-        dateParts.length === 3 &&
-        this.isNumber(dateParts[0]) &&
-        this.isNumber(dateParts[1]) &&
-        this.isNumber(dateParts[2])
-      ) {
-        return {
-          day: this.toInteger(dateParts[0]),
-          month: this.toInteger(dateParts[1]),
-          year: this.toInteger(dateParts[2]),
-        };
-      }
+      value = value.trim();
+      let mdt = moment(value, this.placeholder);
     }
     return null;
   }
 
   format(date: NgbDateStruct): string {
-    return date
-      ? `${this.isNumber(date.day) ? this.padNumber(date.day) : ''}/${
-          this.isNumber(date.month) ? this.padNumber(date.month) : ''
-        }/${date.year}`
-      : '';
-  }
-
-  private toInteger(value: any): number {
-    return parseInt(`${value}`, 10);
-  }
-
-  private isNumber(value: any): value is number {
-    return !isNaN(this.toInteger(value));
-  }
-
-  private padNumber(value: number) {
-    if (this.isNumber(value)) {
-      return `0${value}`.slice(-2);
-    } else {
-      return '';
-    }
+    if (!date) return '';
+    let mdt = moment([date.year, date.month - 1, date.day]);
+    if (!mdt.isValid()) return '';
+    return mdt.format(this.placeholder);
   }
 }

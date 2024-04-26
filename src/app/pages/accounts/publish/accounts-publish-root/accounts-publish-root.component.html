@@ -1,25 +1,25 @@
-<h1>Publish</h1>
+<h1>{{ "Publish" | translate }}</h1>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5">
   <div>
-    <label class="form-label">Mensagem da publicação</label>
+    <label class="form-label">{{ "Content" | translate }}</label>
     <textarea
       type="text"
       class="form-control"
       formControlName="text"
       rows="6"
-      placeholder="Escreva a mensagem da publicação"
+      placeholder="{{ 'Enter_Content' | translate }}"
     ></textarea>
   </div>
-  <label class="form-label mt-2">Plataformas</label>
+  <label class="form-label mt-2">{{ "Plataforms" | translate }}</label>
   <div class="col-12 d-flex gap-2">
     <app-image-checkbox
       formControlName="x"
-      imagePath="assets/brands/x.png"
+      imagePath="assets/images/brands/x.png"
     ></app-image-checkbox>
     <app-image-checkbox
       formControlName="instagram"
-      imagePath="assets/brands/instagram.png"
+      imagePath="assets/images/brands/instagram.png"
     ></app-image-checkbox>
   </div>
   <button
@@ -27,6 +27,6 @@
     class="btn btn-primary float-end mt-2"
     [disabled]="form.invalid"
   >
-    Criar publicação
+    {{ "Create_Post" | translate }}
   </button>
 </form>

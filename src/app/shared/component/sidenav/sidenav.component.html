@@ -23,7 +23,7 @@
             >{{ data.icon }}</app-icon
           >
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
-            {{ data.label }}
+            {{ data.label | translate }}
           </span>
           <app-icon
             *ngIf="data.items && collapsed"
@@ -45,7 +45,7 @@
             >{{ data.icon }}</app-icon
           >
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
-            {{ data.label }}
+            {{ data.label | translate }}
           </span>
         </a>
         <div *ngIf="collapsed && data.items && data.items.length > 0">

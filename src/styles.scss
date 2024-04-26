@@ -1,7 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 @import "~material-icons/iconfont/material-icons.css";
 @import "bootstrap/scss/bootstrap.scss";
+@import "ngx-toastr/toastr";
 
 * {
   margin: 0;
@@ -17,9 +17,3 @@ body {
 .material-icons {
   margin: 0 !important;
 }
-
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
-
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';

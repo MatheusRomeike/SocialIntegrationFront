@@ -24,7 +24,7 @@
       [class.is-valid]="formControl?.valid && formControl?.touched"
       (click)="updateTouched()"
       (blur)="blur($event)"
-      [placeholder]="placeholder"
+      [placeholder]="placeholder.toLowerCase()"
       maxlength="10"
     />
 

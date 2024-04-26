@@ -2,8 +2,8 @@
   <div class="container col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3 rounded">
     <div class="login">
       <div class="login-title">
-        <h1>Hello.</h1>
-        <h1>Welcome Back</h1>
+        <h1>{{ "Hello" | translate }}</h1>
+        <h1>{{ "Welcome_Back" | translate }}</h1>
       </div>
       <form
         [formGroup]="form"
@@ -13,7 +13,7 @@
           input-text
           [formControlName]="'email'"
           [label]="'Email'"
-          [placeholder]="'Email'"
+          [placeholder]="'Enter_Email'"
           [columnSize]="'10'"
           [type]="'email'"
         ></div>
@@ -21,7 +21,7 @@
           input-text
           [formControlName]="'password'"
           [label]="'Password'"
-          [placeholder]="'Password'"
+          [placeholder]="'Enter_Password'"
           [columnSize]="'10'"
           [type]="'password'"
           class="mt-3"
@@ -30,9 +30,9 @@
           <button
             class="btn btn-success"
             [disabled]="!form.valid"
-            (click)="login()"
+            (click)="loginAsync()"
           >
-            Login
+            {{ "Login" | translate }}
           </button>
         </div>
       </form>

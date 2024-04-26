@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AppInjector } from 'src/app/app-injector';
 import { LoadingMessages } from '../models/loading-messages';
@@ -7,8 +8,9 @@ export function Loading(
   mensagens: LoadingMessages = null,
   mostrarErroApi = false
 ): MethodDecorator {
-  const toastrService = AppInjector.get(ToastrService) as ToastrService;
-  const loadingService = AppInjector.get(LoadingService) as LoadingService;
+  const toastrService = AppInjector.get(ToastrService);
+  const loadingService = AppInjector.get(LoadingService);
+  const translationService = AppInjector.get(TranslateService);
 
   return function (target: any, key: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
@@ -21,8 +23,10 @@ export function Loading(
             mensagens.Inicio.Titulo
           );
         }
+
         loadingService.show();
         await originalMethod.apply(this, args);
+
         if (mensagens?.Sucesso) {
           toastrService.success(
             mensagens.Sucesso.Conteudo,
@@ -30,11 +34,17 @@ export function Loading(
           );
         }
       } catch (error) {
-        let titulo = `${mensagens?.Erro?.Titulo ?? 'Erro'}`;
-        let conteudo = `${
-          mensagens?.Erro?.Conteudo ?? 'Ocorreu um erro inesperado'
-        }`;
-        if (mostrarErroApi) conteudo += ` ${error?.error}`;
+        const titulo = translationService.instant(
+          mensagens?.Erro?.Titulo ?? 'Error'
+        );
+
+        let conteudo = translationService.instant(
+          mensagens?.Erro?.Conteudo ?? 'Unexpected_Error'
+        );
+
+        if (mostrarErroApi && error?.error?.data) {
+          conteudo += `: ${translationService.instant(error.error.data)}`;
+        }
 
         toastrService.error(conteudo, titulo);
       } finally {
@@ -43,5 +53,5 @@ export function Loading(
     };
 
     return descriptor;
-  } as any;
+  };
 }

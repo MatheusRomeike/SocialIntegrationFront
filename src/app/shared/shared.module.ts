@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { IconComponent } from './component/icon/icon.component';
@@ -15,6 +16,7 @@ import { LoadingComponent } from './component/loading/loading.component';
 import { SidenavComponent } from './component/sidenav/sidenav.component';
 import { SublevelMenuComponent } from './component/sidenav/sublevel.menu.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
+import { HttpBaseService } from './services/http-base.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
     ConfirmationDialogComponent,
     ReactiveFormsModule,
     CommonModule,
+    TranslateModule,
   ],
   imports: [
     FormsModule,
@@ -52,6 +55,8 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
     NgbModule,
     ToastNoAnimationModule.forRoot(),
     CommonModule,
+    TranslateModule,
   ],
+  providers: [HttpBaseService],
 })
 export class SharedModule {}

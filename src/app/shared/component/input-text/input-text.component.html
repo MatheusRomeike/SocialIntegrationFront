@@ -3,7 +3,7 @@
   style="margin-bottom: 0 !important"
   [for]="id"
   class="form-label pt-1"
-  >{{ label }}{{ required ? " *" : "" }}</label
+  >{{ label | translate }}{{ required ? " *" : "" }}</label
 >
 
 <ng-container *ngIf="!textArea">
@@ -36,7 +36,7 @@
           'is-valid': isValid && formControl?.touched
         }"
         [id]="id"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder | translate"
         [readOnly]="readOnly"
         [min]="min"
         [max]="max"
