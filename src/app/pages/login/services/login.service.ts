@@ -8,6 +8,10 @@ export class LoginService {
   constructor(private httpClient: HttpBaseService) {}
 
   async loginAsync(data) {
+    data = {
+      ...data,
+      date: new Date(),
+    };
     var response = await this.httpClient.post('user/loginAsync', data);
     return response;
   }

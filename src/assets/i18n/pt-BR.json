@@ -20,5 +20,18 @@
   "Logout": "Sair",
   "Content": "Conteúdo",
   "Plataforms": "Plataformas",
-  "Create_Post": "Criar Post"
+  "Create_Post": "Criar Post",
+  "Select": "Selecione",
+  "Required_Field": "Este campo é obrigatório",
+  "Valid_Email": "Este campo deve ser um e-mail válido",
+  "Valid_Cpf": "Este campo deve ser um CPF válido",
+  "Valid_Cnpj": "Este campo deve ser um CNPJ válido",
+  "Valid_Min_Length": "Este campo deve ter no mínimo {requiredLength} caracteres",
+  "Valid_Max_Length": "Este campo deve ter no máximo {requiredLength} caracteres",
+  "Valid_Min_Value": "Este campo deve ser maior ou igual a {min}",
+  "Valid_Max_Value": "Este campo deve ser menor ou igual a {max}",
+  "Password_Must_Match": "As senhas devem ser iguais",
+  "Confirm": "Confirmar",
+  "No": "Não",
+  "Yes": "Sim"
 }

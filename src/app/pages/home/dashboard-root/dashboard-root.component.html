@@ -1,1 +1,17 @@
-<h1>Dashboard</h1>
+<form [formGroup]="form" class="row">
+  <div
+    input-date-picker
+    [required]="true"
+    [formControlName]="'date'"
+    [id]="'date'"
+    [onlyDate]="true"
+    [label]="'date'"
+  ></div>
+  <div
+    input-text
+    [formControlName]="'text'"
+    [id]="'text'"
+    [label]="'text'"
+    [placeholder]="'text'"
+  ></div>
+</form>

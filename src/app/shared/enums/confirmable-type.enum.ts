@@ -1,5 +1,5 @@
 export const enum ConfirmableType {
-  Confirmar,
-  Deletar,
-  Informar,
+  Confirm,
+  Delete,
+  Inform,
 }

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { IconComponent } from './component/icon/icon.component';
@@ -47,6 +48,8 @@ import { HttpBaseService } from './services/http-base.service';
     ReactiveFormsModule,
     CommonModule,
     TranslateModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   imports: [
     FormsModule,
@@ -56,6 +59,8 @@ import { HttpBaseService } from './services/http-base.service';
     ToastNoAnimationModule.forRoot(),
     CommonModule,
     TranslateModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   providers: [HttpBaseService],
 })

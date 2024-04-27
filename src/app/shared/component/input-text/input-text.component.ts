@@ -20,6 +20,7 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { v4 as uuidv4 } from 'uuid';
 import { applyColumn } from '../../utils/form-utils';
 
@@ -101,15 +102,19 @@ export class InputTextComponent
 
     if (!this.isValid && this.formControl?.touched && this.formControl.errors) {
       const validationMessages = [
-        { required: 'Este campo é obrigatório' },
-        { email: 'Este campo deve ser um e-mail válido' },
-        { cpf: 'Este campo deve ser um CPF válido' },
-        { cnpj: 'Este campo deve ser um CNPJ válido' },
-        { minlength: 'Digite no mínimo {requiredLength} caracteres' },
-        { maxlength: 'Digite no máximo {requiredLength} caracteres' },
-        { min: 'Digite um valor maior ou igual a {min}' },
-        { max: 'Digite um valor menor ou igual a {max}' },
-        { senhaConfirmarSenha: 'As senhas não coincidem' },
+        { required: this.translateService.instant('Required_Field') },
+        { email: this.translateService.instant('Valid_Email') },
+        { cpf: this.translateService.instant('Valid_Cpf') },
+        { cnpj: this.translateService.instant('Valid_Cnpj') },
+        { minlength: this.translateService.instant('Valid_Min_Length') },
+        { maxlength: this.translateService.instant('Valid_Max_Length') },
+        { min: this.translateService.instant('Valid_Min_Value') },
+        { max: this.translateService.instant('Valid_Max_Value') },
+        {
+          senhaConfirmarSenha: this.translateService.instant(
+            'Password_Must_Match'
+          ),
+        },
       ];
 
       //const formControlValidators = this.formControl?.validator!!({} as AbstractControl)
@@ -139,7 +144,8 @@ export class InputTextComponent
   }
 
   constructor(
-    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
+    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {

@@ -12,7 +12,7 @@
     [class.is-invalid]="!formControl?.valid && formControl?.touched"
     [class.is-valid]="formControl?.valid && formControl?.touched"
   >
-    <option value="">{{ placeholder ? placeholder : "Selecione" }}</option>
+    <option value="">{{ placeholder | translate }}</option>
     <option [value]="item[bindValue]" *ngFor="let item of items">
       {{ item[bindLabel] }}
     </option>
@@ -27,6 +27,6 @@
       $any(formControl).errors['required']
     "
   >
-    Este campo é obrigatório
+    {{ "Required_Field" | translate }}
   </div>
 </div>

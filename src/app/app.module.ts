@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { setAppInjector } from './app-injector';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     { provide: LOCALE_ID, useValue: determineLocale() },
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatte },
+    provideEnvironmentNgxMask(),
   ],
   bootstrap: [AppComponent],
 })

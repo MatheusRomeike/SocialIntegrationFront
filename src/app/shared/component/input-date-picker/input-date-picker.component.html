@@ -1,46 +1,36 @@
 <div class="form-group mb-0">
   <label *ngIf="label" [for]="id" class="form-label mb-0 pt-1"
-    >{{ label }}{{ required ? " *" : "" }}</label
+    >{{ label | translate }}{{ required ? " *" : "" }}</label
   >
-
-  <div class="input-group">
+  <div class="input-group mr-2">
     <input
-      [name]="name"
-      [ngModel]="valueDisplay"
-      [navigation]="'arrows'"
-      (dateSelect)="valueChange($event)"
-      [showWeekNumbers]="false"
-      [firstDayOfWeek]="0"
-      ngbDatepicker
-      #date="ngbDatepicker"
-      class="form-control"
-      container="body"
-      autocomplete="off"
-      (keyup)="applyMaskAndUpdateValue($event)"
-      [disabled]="formControl?.disabled"
-      [ngModelOptions]="{ standalone: true }"
+      #input
       [id]="id"
+      [ngClass]="ngControl?.valid ? 'ng-valid' : 'ng-invalid'"
+      class="form-control"
+      (blur)="inputBlur($event)"
+      [ngModel]="dateString | date : inputDatetimeFormat"
+      (change)="onInputChange($event)"
+      [disabled]="disabled"
+      [mask]="inputDatetimeMask"
+      placeholder="{{ inputDatetimeFormat }}"
       [class.is-invalid]="!formControl?.valid && formControl?.touched"
       [class.is-valid]="formControl?.valid && formControl?.touched"
-      (click)="updateTouched()"
-      (blur)="blur($event)"
-      [placeholder]="placeholder.toLowerCase()"
-      maxlength="10"
     />
 
     <div class="input-group-append">
       <button
-        class="btn btn-sm btn-info btn-icon-calendar"
-        (click)="date.toggle()"
+        class="btn btn-secondary btn-icon"
+        [ngbPopover]="calendarContent"
+        [disabled]="disabled"
         type="button"
+        [class.is-invalid]="!formControl?.valid && formControl?.touched"
+        [class.is-valid]="formControl?.valid && formControl?.touched"
       >
-        <app-icon class="material-icons-outlined" style="color: White"
-          >calendar_month</app-icon
-        >
+        <app-icon class="icon">calendar_month</app-icon>
       </button>
     </div>
   </div>
-
   <div
     class="input-invalid-feedback text-danger"
     *ngIf="
@@ -50,6 +40,47 @@
       $any(formControl).errors['required']
     "
   >
-    Este campo é obrigatório
+    {{ "Required_Field" | translate }}
   </div>
 </div>
+
+<ng-template #calendarContent>
+  <div>
+    <div *ngIf="!showTimePickerToggle">
+      <ngb-datepicker
+        #dp
+        id="dp"
+        name="datepicker"
+        class="datepicker"
+        [ngModel]="datetime"
+        (ngModelChange)="onDateChange($event)"
+      ></ngb-datepicker>
+      <button
+        class="btn btn-secondary btn-icon"
+        [disabled]="!datetime?.day"
+        type="button"
+        (click)="toggleDateTimeState($event)"
+      >
+        <app-icon class="icon">schedule</app-icon>
+      </button>
+    </div>
+    <div *ngIf="showTimePickerToggle">
+      <ngb-timepicker
+        name="timepicker"
+        [ngModel]="datetime"
+        (ngModelChange)="onTimeChange($event)"
+        [seconds]="seconds"
+        [hourStep]="hourStep"
+        [minuteStep]="minuteStep"
+        [secondStep]="secondStep"
+      ></ngb-timepicker>
+      <button
+        class="btn btn-secondary btn-icon"
+        type="button"
+        (click)="toggleDateTimeState($event)"
+      >
+        <app-icon class="icon">calendar_month</app-icon>
+      </button>
+    </div>
+  </div>
+</ng-template>

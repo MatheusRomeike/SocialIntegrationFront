@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { supportedLanguages } from 'src/assets/i18n/supported-language';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,6 @@ export class AppComponent {
 
   constructor(private translate: TranslateService) {
     const browserLang = window.navigator.language || 'en-US';
-    const supportedLanguages = ['en-US', 'pt-BR'];
     const languageToUse = supportedLanguages.includes(browserLang)
       ? browserLang
       : 'en-US';

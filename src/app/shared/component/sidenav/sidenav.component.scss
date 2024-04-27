@@ -62,7 +62,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
 
   .sidenav-nav-item {
     width: 100%;
@@ -76,6 +75,7 @@
       text-decoration: none;
       border-radius: 0.625rem;
       transition: all 0.3s ease;
+      cursor: pointer;
 
       .sidenav-link-icon {
         font-size: 22px;

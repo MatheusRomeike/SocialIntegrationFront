@@ -16,15 +16,15 @@ export class ConfirmationDialogComponent implements OnInit {
   modalRef: NgbModalRef | undefined;
   onConfirmed = new EventEmitter();
 
-  confirmar = ConfirmableType.Confirmar;
-  deletar = ConfirmableType.Deletar;
-  informar = ConfirmableType.Informar;
+  confirm = ConfirmableType.Confirm;
+  delete = ConfirmableType.Delete;
+  inform = ConfirmableType.Inform;
 
   constructor() {}
 
   ngOnInit() {}
 
-  confirm() {
+  confirmButton() {
     this.onConfirmed.emit();
   }
 

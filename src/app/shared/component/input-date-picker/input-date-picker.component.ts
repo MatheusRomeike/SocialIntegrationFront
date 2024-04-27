@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -6,76 +7,84 @@ import {
   OnInit,
   Optional,
   SkipSelf,
+  ViewChild,
   forwardRef,
 } from '@angular/core';
 import {
   AbstractControl,
   ControlContainer,
-  FormGroupDirective,
+  ControlValueAccessor,
   NG_VALUE_ACCESSOR,
+  NgControl,
 } from '@angular/forms';
-import * as moment from 'moment';
-import { conformToMask } from 'text-mask-core';
+import {
+  NgbDateStruct,
+  NgbPopover,
+  NgbPopoverConfig,
+  NgbTimeStruct,
+} from '@ng-bootstrap/ng-bootstrap';
+import { noop } from 'rxjs';
+import { DateTimeModel } from '../../models/date-time.model';
 import { applyColumn } from '../../utils/form-utils';
 import { BaseCustomInputComponent } from '../base-custom-input/base-custom-input.component';
-
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => InputDatePickerComponent),
-  multi: true,
-};
-
-export const CUSTOM_INPUT_FORM_GROUP: any = {
-  provide: ControlContainer,
-  useExisting: FormGroupDirective,
-};
 
 @Component({
   selector: '[input-date-picker]',
   templateUrl: './input-date-picker.component.html',
   styleUrls: ['./input-date-picker.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
-  viewProviders: [CUSTOM_INPUT_FORM_GROUP],
+  providers: [
+    DatePipe,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputDatePickerComponent),
+      multi: true,
+    },
+  ],
 })
 export class InputDatePickerComponent
   extends BaseCustomInputComponent
-  implements OnInit, AfterViewInit
+  implements ControlValueAccessor, OnInit, AfterViewInit
 {
+  dateString: string;
+  inputDatetimeFormat;
+  inputDatetimeMask;
+
+  @Input() onlyDate = true;
   @Input() columnSize: number | string = 3;
   @Input() label = '';
-  @Input() disabled: boolean;
-  @Input() id: string = '';
+  @Input() id = '';
+  @Input() hourStep = 1;
+  @Input() minuteStep = 1;
+  @Input() secondStep = 30;
+  @Input() seconds = true;
+  @Input() disabled = false;
   @Input() formControl: AbstractControl | null = null;
 
-  placeholder = this.getDatePattern(window.navigator.language);
-  valueDisplay: any;
-  required = false;
+  public showTimePickerToggle = false;
+  public datetime: DateTimeModel = new DateTimeModel();
+  private firstTimeAssign = true;
+  public required = false;
+
+  @ViewChild('dp') dp;
+  @ViewChild(NgbPopover) popover: NgbPopover;
+  @ViewChild('input') input;
+
+  public override onTouched: () => void = noop;
+  public override onChange: (_: any) => void = noop;
+
+  public ngControl: NgControl;
 
   constructor(
-    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
+    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer,
+    private config: NgbPopoverConfig
   ) {
     super();
+    config.autoClose = 'outside';
+    config.placement = 'auto';
   }
 
-  valueChange(event) {
-    let dia = event.day.toString().padStart(2, '0');
-    let mes = event.month.toString().padStart(2, '0');
-    let ano = event.year;
-
-    let value = {
-      target: {
-        value: `${dia}/${mes}/${ano}`,
-      },
-    };
-
-    this.applyMaskAndUpdateValue({
-      target: {
-        value: `${dia}/${mes}/${ano}`,
-      },
-    });
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.inputDatetimeFormat = this.getDatePattern(window.navigator.language);
     if (this.controlContainer) {
       if (this.formControlName) {
         this.formControl = this.controlContainer!!.control!!.get(
@@ -105,82 +114,161 @@ export class InputDatePickerComponent
     }
   }
 
-  applyMaskAndUpdateValue(event: any) {
-    var v = event.target.value;
-    const mask = [
-      /[0-9]/,
-      /[0-9]/,
-      '/',
-      /[0-9]/,
-      /[0-9]/,
-      '/',
-      /[1-9]/,
-      /[0-9]/,
-      /[0-9]/,
-      /[0-9]/,
-    ];
-    var convert = conformToMask(v, mask, { guide: false }).conformedValue;
-    event.target.value = convert;
-
-    if (convert.length == 10) {
-      const date = moment(convert, this.placeholder);
-      this.writeValue(date.toDate());
-    }
-  }
-
-  override writeValue(value) {
-    if (value) {
-      const date = new Date(value);
-      this.valueDisplay = {
-        day: date.getDate(),
-        month: date.getMonth() + 1,
-        year: date.getFullYear(),
-      } as any;
-      this.onChange(value);
-    } else {
-      try {
-        this.valueDisplay = null;
-        this.onChange(null);
-      } catch (e) {}
-    }
-  }
-
-  updateTouched() {
-    if (this.formControl) this.formControl.markAsTouched();
-  }
-
-  blur(event) {
-    this.updateTouched();
-    if (event.target.value.length < 10) {
-      this.writeValue(null);
-      this.valueDisplay = null;
-      event.target.value = '';
-    } else {
-      const date = moment(event.target.value, this.placeholder);
-      this.writeValue(date.toDate());
-    }
-  }
-
   ngAfterViewInit(): void {
+    this.popover.hidden.subscribe(($event) => {
+      this.showTimePickerToggle = false;
+    });
     applyColumn(this.id, this.columnSize);
   }
 
-  getDatePattern(locale) {
-    var formatter = new Intl.DateTimeFormat(locale).formatToParts();
+  override writeValue(newModel: string) {
+    if (newModel) {
+      this.datetime = Object.assign(
+        this.datetime,
+        DateTimeModel.fromLocalString(newModel, this.onlyDate)
+      );
+      this.dateString = newModel;
+      this.setDateStringModel();
+    } else {
+      this.datetime = new DateTimeModel();
+    }
+  }
 
-    return formatter
+  override registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  override registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  toggleDateTimeState($event) {
+    this.showTimePickerToggle = !this.showTimePickerToggle;
+    $event.stopPropagation();
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  onInputChange($event: any) {
+    const value = $event.target.value;
+    const dt = DateTimeModel.fromLocalString(value, this.onlyDate);
+    if (dt == null || value == '') {
+      this.dateString = null;
+      this.input.nativeElement.value = null;
+      this.onChange(null);
+      return;
+    }
+
+    if (dt) {
+      this.datetime = dt;
+      this.setDateStringModel();
+    } else if (value.trim() === '') {
+      this.datetime = new DateTimeModel();
+      this.dateString = '';
+      this.onChange(this.dateString);
+    } else {
+      this.onChange(value.toISOString());
+    }
+  }
+
+  onDateChange($event: string | NgbDateStruct) {
+    if (typeof $event === 'object' && $event.year) {
+      $event = `${$event.year}-${$event.month}-${$event.day}`;
+    } else if (typeof $event === 'object') {
+      $event = '';
+    }
+
+    const date = DateTimeModel.fromLocalString($event, this.onlyDate);
+
+    if (!date) {
+      this.dateString = this.dateString;
+      return;
+    }
+
+    if (!this.datetime) {
+      this.datetime = date;
+    }
+
+    this.datetime.year = date.year;
+    this.datetime.month = date.month;
+    this.datetime.day = date.day;
+
+    this.setDateStringModel();
+  }
+
+  onTimeChange(event: NgbTimeStruct) {
+    this.datetime.hour = event.hour;
+    this.datetime.minute = event.minute;
+    this.datetime.second = event.second;
+
+    this.setDateStringModel();
+  }
+
+  setDateStringModel() {
+    this.dateString = this.datetime.toString();
+    let date = new Date(Date.parse(this.dateString));
+
+    this.formControl.markAsTouched();
+    this.formControl.updateValueAndValidity();
+
+    this.onChange(date.toISOString());
+
+    this.dateString = this.dateString.substring(0, this.dateString.length - 6);
+  }
+
+  inputBlur($event) {
+    this.onTouched();
+  }
+
+  getDatePattern(locale) {
+    const formatter = new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    }).formatToParts(new Date());
+
+    const pattern = formatter
       .map(function (e) {
+        e.value = e.value.replace(',', '');
         switch (e.type) {
+          case 'year':
+            return 'yyyy';
           case 'month':
             return 'MM';
           case 'day':
-            return 'DD';
-          case 'year':
-            return 'YYYY';
-          default:
+            return 'dd';
+          case 'hour':
+            return 'HH';
+          case 'minute':
+            return 'mm';
+          case 'second':
+            return 'ss';
+          case 'literal':
             return e.value;
+          default:
+            return '';
         }
       })
       .join('');
+
+    this.inputDatetimeMask = pattern
+      .replace('dd', 'd0')
+      .replace('MM', 'M0')
+      .replace('yyyy', '0000')
+      .replace('HH', 'Hh')
+      .replace('mm', 'm0')
+      .replace('ss', 's0');
+
+    if (this.onlyDate) {
+      this.inputDatetimeMask = this.inputDatetimeMask.split(' ')[0];
+      return pattern.split(' ')[0];
+    }
+
+    return pattern;
   }
 }

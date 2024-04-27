@@ -20,5 +20,18 @@
   "Content": "Content",
   "Enter_Content": "Enter your content here",
   "Plataforms": "Plataforms",
-  "Create_Post": "Create Post"
+  "Create_Post": "Create Post",
+  "Select": "Select",
+  "Required_Field": "This field is required",
+  "Valid_Email": "This field must be a valid email",
+  "Valid_Cpf": "This field must be a valid CPF",
+  "Valid_Cnpj": "This field must be a valid CNPJ",
+  "Valid_Min_Length": "This field must have at least {requiredLength} characters",
+  "Valid_Max_Length": "This field must have at most {requiredLength} characters",
+  "Valid_Min_Value": "This field must be greater or equal to {min}",
+  "Valid_Max_Value": "This field must be less or equal to {max}",
+  "Password_Must_Match": "Passwords must match",
+  "Confirm": "Confirm",
+  "No": "No",
+  "Yes": "Yes"
 }

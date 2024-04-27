@@ -11,3 +11,39 @@
   height: 100%;
   width: 100%;
 }
+
+.icon {
+  background-color: #6c757d !important;
+  color: white !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+.icon:hover {
+  background-color: #5c636a !important;
+}
+
+.btn {
+  width: 100%;
+}
+
+.btn-icon {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn:hover {
+  .icon {
+    background-color: #5c636a !important;
+  }
+}
+
+.is-valid {
+  border-color: var(--bs-form-valid-border-color);
+}
+
+.is-invalid {
+  border-color: var(--bs-form-invalid-border-color);
+}

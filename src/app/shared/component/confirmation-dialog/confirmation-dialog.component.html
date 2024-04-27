@@ -1,7 +1,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Confirmação</h5>
+      <h5 class="modal-title">{{ "Confirm" | translate }}</h5>
       <button
         type="button"
         class="btn-close"
@@ -12,50 +12,36 @@
     </div>
     <div class="modal-body">
       <ng-container *ngTemplateOutlet="icone"></ng-container>
-      <p class="d-flex justify-content-center">{{ modalMessage }}</p>
+      <p class="d-flex justify-content-center">
+        {{ modalMessage | translate }}
+      </p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="close()">
-        Não
+        {{ "No" | translate }}
       </button>
-      <ng-container *ngTemplateOutlet="botaoSim"></ng-container>
+      <button
+        type="button"
+        class="btn"
+        [ngClass]="{
+          'btn-success': confirmableType === confirm,
+          'btn-danger': confirmableType === delete,
+          'btn-primary': confirmableType === inform
+        }"
+        (click)="confirmButton()"
+      >
+        {{ "Yes" | translate }}
+      </button>
     </div>
   </div>
 </div>
 
 <ng-template #icone>
   <div class="d-flex justify-content-center">
-    <app-icon class="icon" *ngIf="confirmableType === confirmar"
+    <app-icon class="icon" *ngIf="confirmableType === confirm"
       >check_circle</app-icon
     >
-    <app-icon class="icon" *ngIf="confirmableType === deletar">delete</app-icon>
-    <app-icon class="icon" *ngIf="confirmableType === informar">info</app-icon>
+    <app-icon class="icon" *ngIf="confirmableType === delete">delete</app-icon>
+    <app-icon class="icon" *ngIf="confirmableType === inform">info</app-icon>
   </div>
-</ng-template>
-
-<ng-template #botaoSim>
-  <button
-    type="button"
-    class="btn btn-success"
-    *ngIf="confirmableType == confirmar"
-    (click)="confirm()"
-  >
-    Sim
-  </button>
-  <button
-    type="button"
-    class="btn btn-danger"
-    *ngIf="confirmableType == deletar"
-    (click)="confirm()"
-  >
-    Sim
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    *ngIf="confirmableType == informar"
-    (click)="confirm()"
-  >
-    Sim
-  </button>
 </ng-template>

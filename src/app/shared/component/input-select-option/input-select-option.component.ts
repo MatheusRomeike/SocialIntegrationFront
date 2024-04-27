@@ -33,7 +33,7 @@ export class InputSelectOptionComponent
 {
   @Input() formControlName = '';
   @Input() columnSize = 3;
-  @Input() placeholder = '';
+  @Input() placeholder = 'Select';
   @Input() label = '';
   @Input() id: string = '';
   @Input() type = 'text';
