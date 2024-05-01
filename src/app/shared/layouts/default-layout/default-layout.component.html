@@ -1,4 +1,4 @@
 <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-<div class="body" [ngClass]="getBodyClass()">
+<div class="body" [ngClass]="this.collapsed ? 'body-trimmed' : ''">
   <router-outlet></router-outlet>
 </div>

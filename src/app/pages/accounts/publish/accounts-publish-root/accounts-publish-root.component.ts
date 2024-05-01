@@ -19,7 +19,9 @@ export class AccountsPublishRootComponent {
   constructor(private publishService: PublishService) {
     this.form = new FormGroup(
       {
-        text: new FormControl('', [Validators.required]),
+        text: new FormControl('texto de teste de publicação galera, teste.', [
+          Validators.required,
+        ]),
         x: new FormControl(false),
         instagram: new FormControl(false),
       },

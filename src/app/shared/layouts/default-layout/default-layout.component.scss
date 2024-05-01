@@ -1,13 +1,12 @@
 .body {
   width: calc(100% - 5rem);
-  height: 100vh;
+  height: 100%;
   margin-left: 5rem;
   z-index: 0;
   position: relative;
   top: 0;
   transition: all 0.5s ease;
-  background-color: #f4f7fa;
-  background-image: url(../../../../assets/images/background-pattern.png);
+  background-color: #f8f9fc;
   padding: 3rem;
 }
 
@@ -16,7 +15,13 @@
   margin-left: 16.5625rem;
 }
 
-.body-md-screen {
-  width: calc(100% - 5rem);
-  margin-left: 5rem;
+@media (max-width: 767px) {
+  .body {
+    width: calc(100% - 4rem);
+    margin-left: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
 }

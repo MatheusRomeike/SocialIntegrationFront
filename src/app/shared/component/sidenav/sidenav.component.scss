@@ -11,20 +11,24 @@
   .logo-container {
     display: flex;
     align-items: center;
-    padding: 0.938rem 0.938rem 0 0.938rem;
+    padding: 0.938rem 0.938rem 0.5rem 0.938rem;
     width: 100%;
 
     .logo {
-      background: #fff;
       text-align: center;
       width: 3rem;
       min-width: 3rem;
+      height: 2.7rem;
+      min-height: 2.7rem;
       border-radius: 0.313rem;
       padding: 0.313rem;
       font-size: 24px;
       font-weight: 900;
       cursor: pointer;
       border: none;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .logo-text {
@@ -62,6 +66,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 
   .sidenav-nav-item {
     width: 100%;
@@ -75,7 +80,6 @@
       text-decoration: none;
       border-radius: 0.625rem;
       transition: all 0.3s ease;
-      cursor: pointer;
 
       .sidenav-link-icon {
         font-size: 22px;
@@ -205,4 +209,22 @@
 
 .collapsed {
   margin-left: 0.625rem !important;
+}
+
+@media (max-width: 767px) {
+  .sidenav-collapsed {
+    width: 16.5625rem !important;
+  }
+
+  .sidenav {
+    width: 4rem;
+  }
+
+  .logo-container {
+    padding-left: 0.5rem !important;
+  }
+
+  .sidenav-nav {
+    padding: 0.5rem !important;
+  }
 }

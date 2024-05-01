@@ -1,32 +1,68 @@
-<h1>{{ "Publish" | translate }}</h1>
+<h1 class="page-title">{{ "Publish" | translate }}</h1>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5">
-  <div>
-    <label class="form-label">{{ "Content" | translate }}</label>
-    <textarea
-      type="text"
-      class="form-control"
-      formControlName="text"
-      rows="6"
-      placeholder="{{ 'Enter_Content' | translate }}"
-    ></textarea>
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+    <div class="card">
+      <div class="card-header px-4">
+        <h5 class="card-title">Informations</h5>
+        <h6 class="card-subtitle mb-2 text-secondary">
+          {{
+            "Fill in the form to create a new post. Select the platforms to share it on."
+              | translate
+          }}
+        </h6>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div>
+            <label class="form-label">{{ "Content" | translate }}</label>
+            <textarea
+              type="text"
+              class="form-control"
+              formControlName="text"
+              rows="12"
+              placeholder="{{ 'Enter_Content' | translate }}"
+            ></textarea>
+          </div>
+          <label class="form-label mt-2">{{ "Plataforms" | translate }}</label>
+          <div class="col-12 d-flex gap-2">
+            <app-image-checkbox
+              formControlName="x"
+              imagePath="assets/images/brands/x.png"
+            ></app-image-checkbox>
+            <app-image-checkbox
+              formControlName="instagram"
+              imagePath="assets/images/brands/instagram.png"
+            ></app-image-checkbox>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button
+          type="submit"
+          class="btn btn-primary float-end"
+          [disabled]="form.invalid"
+        >
+          {{ "Create_Post" | translate }}
+        </button>
+      </div>
+    </div>
   </div>
-  <label class="form-label mt-2">{{ "Plataforms" | translate }}</label>
-  <div class="col-12 d-flex gap-2">
-    <app-image-checkbox
-      formControlName="x"
-      imagePath="assets/images/brands/x.png"
-    ></app-image-checkbox>
-    <app-image-checkbox
-      formControlName="instagram"
-      imagePath="assets/images/brands/instagram.png"
-    ></app-image-checkbox>
+
+  <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+    <div class="card mh-100 h-100">
+      <div class="card-header">
+        <h5 class="card-title">{{ "Preview" | translate }}</h5>
+        <h6 class="card-subtitle mb-2 text-secondary">
+          {{ "Post preview" | translate }}
+        </h6>
+      </div>
+      <div class="card-body mh-100 h-100">
+        <app-instagram-preview
+          [textContent]="form.value.text"
+          [imageSrc]="'assets/images/placeholder2.jpg'"
+        ></app-instagram-preview>
+      </div>
+    </div>
   </div>
-  <button
-    type="submit"
-    class="btn btn-primary float-end mt-2"
-    [disabled]="form.invalid"
-  >
-    {{ "Create_Post" | translate }}
-  </button>
-</form>
+</div>

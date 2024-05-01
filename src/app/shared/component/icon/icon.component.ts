@@ -1,9 +1,14 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
-  template: `<ng-content></ng-content>`,
+  template: ` <ng-content></ng-content> `,
 })
 export class IconComponent {
-  @HostBinding('class.material-icons') materialIconsClass = true;
+  @Input() isMaterialIcon = true;
+
+  @HostBinding('class.material-icons')
+  get isMaterialClass(): boolean {
+    return this.isMaterialIcon; // Adiciona a classe 'material-icons' quando necessário
+  }
 }

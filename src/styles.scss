@@ -12,8 +12,46 @@
 body {
   position: relative;
   font-family: "Roboto", sans-serif;
+  background-color: #f8f9fc;
 }
 
 .material-icons {
   margin: 0 !important;
+  width: 24px;
+  height: 24px;
+}
+
+.card {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.card-header,
+.card-footer {
+  background-color: white;
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.0125em;
+  margin-bottom: 0;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 500;
+  letter-spacing: 0.0071428571em;
+  margin-bottom: 0 !important;
+  opacity: 0.6;
+}
+
+.page-title {
+  margin-bottom: 40px;
+}
+
+.text-muted {
+  color: rgb(115, 115, 115) !important;
 }
