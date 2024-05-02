@@ -47,6 +47,7 @@ export class InputDatePickerComponent
 {
   dateString: string;
   inputDatetimeFormat;
+  placeholder;
   inputDatetimeMask;
 
   @Input() onlyDate = true;
@@ -85,6 +86,11 @@ export class InputDatePickerComponent
 
   ngOnInit(): void {
     this.inputDatetimeFormat = this.getDatePattern(window.navigator.language);
+    this.placeholder = this.inputDatetimeFormat;
+    if (!this.seconds) {
+      this.placeholder = this.placeholder.replace(':ss', '');
+    }
+
     if (this.controlContainer) {
       if (this.formControlName) {
         this.formControl = this.controlContainer!!.control!!.get(
@@ -263,6 +269,10 @@ export class InputDatePickerComponent
       .replace('HH', 'Hh')
       .replace('mm', 'm0')
       .replace('ss', 's0');
+
+    if (!this.seconds) {
+      this.inputDatetimeMask = this.inputDatetimeMask.replace(':s0', '');
+    }
 
     if (this.onlyDate) {
       this.inputDatetimeMask = this.inputDatetimeMask.split(' ')[0];

@@ -13,7 +13,7 @@
       (change)="onInputChange($event)"
       [disabled]="disabled"
       [mask]="inputDatetimeMask"
-      placeholder="{{ inputDatetimeFormat }}"
+      placeholder="{{ placeholder }}"
       [class.is-invalid]="!formControl?.valid && formControl?.touched"
       [class.is-valid]="formControl?.valid && formControl?.touched"
     />
