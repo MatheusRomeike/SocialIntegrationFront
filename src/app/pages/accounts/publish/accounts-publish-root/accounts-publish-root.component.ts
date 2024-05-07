@@ -19,9 +19,8 @@ export class AccountsPublishRootComponent {
   constructor(private publishService: PublishService) {
     this.form = new FormGroup(
       {
-        text: new FormControl('texto de teste de publicação galera, teste.', [
-          Validators.required,
-        ]),
+        text: new FormControl('', [Validators.required]),
+        photos: new FormControl([], Validators.required),
         x: new FormControl(false),
         instagram: new FormControl(false),
       },
@@ -40,5 +39,9 @@ export class AccountsPublishRootComponent {
       );
       return isChecked ? null : { atLeastOneChecked: true };
     };
+  }
+
+  getPreviewUrl(file: File): string {
+    return URL.createObjectURL(file);
   }
 }

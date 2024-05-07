@@ -30,3 +30,30 @@
   margin-top: 2px;
   margin-bottom: 4px;
 }
+
+.image-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Evita que a imagem ultrapasse as bordas */
+  height: 300px; /* Tamanho fixo para o contêiner, altere conforme necessário */
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}

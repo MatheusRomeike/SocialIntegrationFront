@@ -12,17 +12,24 @@
       <span class="text fw-bold">•••</span>
     </div>
   </div>
-  <div class="content">
-    <img class="rounded" src="{{ imageSrc }}" />
+  <div class="content" *ngIf="imageFiles.length > 0">
+    <app-icon class="image-icon left" (click)="previousImage()"
+      >chevron_left</app-icon
+    >
+    <img class="rounded" [src]="getPreviewUrl()" />
+    <app-icon class="image-icon right" (click)="nextImage()"
+      >chevron_right</app-icon
+    >
   </div>
   <div class="information">
     <ng-container [ngTemplateOutlet]="icons"></ng-container>
     <div class="liked d-flex flex-column">
       <span class="text">
-        Curtido por <b class="text">user</b> e
-        <b class="text">outras pessoas</b>
+        {{ "Liked_By" | translate }} <b class="text">user</b>
+        {{ "and" | translate }}
+        <b class="text">{{ "Others" | translate }}</b>
       </span>
-      <div class="message">
+      <div class="message" *ngIf="textContent">
         <span class="text fw-bold expandable-text"
           >{{ "Account" | translate }}
         </span>

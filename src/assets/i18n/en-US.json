@@ -32,6 +32,20 @@
   "Valid_Max_Value": "This field must be less or equal to {max}",
   "Password_Must_Match": "Passwords must match",
   "Confirm": "Confirm",
+  "Cancel": "Cancel",
   "No": "No",
-  "Yes": "Yes"
+  "Yes": "Yes",
+  "Photos": "Photos",
+  "Max_Files_Reached": "Limit of {maxFiles} files reached, rest ignored.",
+  "Select_Archive": "Select archives",
+  "Drop_Archives_Here": "...or drop files here",
+  "Image_Visualization": "Image visualization",
+  "Close": "Close",
+  "Informations": "Informations",
+  "Liked_By": "Liked by",
+  "And": "and",
+  "Others": "others",
+  "Information-Sub-Title": "Fill in the form to create a new post. Select the platforms to share it on.",
+  "Preview": "Preview",
+  "Post-Preview": "Post Preview"
 }

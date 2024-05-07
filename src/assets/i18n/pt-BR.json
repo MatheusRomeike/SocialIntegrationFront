@@ -32,6 +32,20 @@
   "Valid_Max_Value": "Este campo deve ser menor ou igual a {max}",
   "Password_Must_Match": "As senhas devem ser iguais",
   "Confirm": "Confirmar",
+  "Cancel": "Cancelar",
   "No": "Não",
-  "Yes": "Sim"
+  "Yes": "Sim",
+  "Photos": "Fotos",
+  "Max_Files_Reached": "Limite de {maxFiles} arquivos atingido, os demais foram ignorados.",
+  "Select_Archive": "Selecionar arquivos",
+  "Drop_Archives_Here": "...ou arraste os arquivos até aqui",
+  "Image_Visualization": "Visualização da imagem",
+  "Close": "Fechar",
+  "Informations": "Informações",
+  "Liked_By": "Curtido por",
+  "And": "e",
+  "Others": "outras pessoas",
+  "Information-Sub-Title": "Preencha o formulário para criar uma nova postagem. Selecione as plataformas para compartilhá-lo.",
+  "Preview": "Pré-visualização",
+  "Post-Preview": "Pré-visualização da postagem"
 }

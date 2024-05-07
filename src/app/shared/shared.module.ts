@@ -11,6 +11,7 @@ import { IconComponent } from './component/icon/icon.component';
 import { ImageCheckboxComponent } from './component/image-checkbox/image-checkbox.component';
 import { InputCheckboxComponent } from './component/input-checkbox/input-checkbox.component';
 import { InputDatePickerComponent } from './component/input-date-picker/input-date-picker.component';
+import { InputFileComponent } from './component/input-file/input-file.component';
 import { InputSelectOptionComponent } from './component/input-select-option/input-select-option.component';
 import { InputTextComponent } from './component/input-text/input-text.component';
 import { LoadingComponent } from './component/loading/loading.component';
@@ -32,6 +33,7 @@ import { HttpBaseService } from './services/http-base.service';
     InputCheckboxComponent,
     LoadingComponent,
     ConfirmationDialogComponent,
+    InputFileComponent,
   ],
   exports: [
     DefaultLayoutComponent,
@@ -50,6 +52,7 @@ import { HttpBaseService } from './services/http-base.service';
     TranslateModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    InputFileComponent,
   ],
   imports: [
     FormsModule,
