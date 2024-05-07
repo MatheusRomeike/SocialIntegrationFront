@@ -13,11 +13,17 @@
     </div>
   </div>
   <div class="content" *ngIf="imageFiles.length > 0">
-    <app-icon class="image-icon left" (click)="previousImage()"
+    <app-icon
+      class="image-icon left"
+      (click)="previousImage()"
+      *ngIf="showPreviousButton()"
       >chevron_left</app-icon
     >
     <img class="rounded" [src]="getPreviewUrl()" />
-    <app-icon class="image-icon right" (click)="nextImage()"
+    <app-icon
+      class="image-icon right"
+      (click)="nextImage()"
+      *ngIf="showNextButton()"
       >chevron_right</app-icon
     >
   </div>

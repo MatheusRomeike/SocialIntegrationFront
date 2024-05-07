@@ -17,6 +17,17 @@ export class InstagramPreviewComponent {
     return URL.createObjectURL(this.imageFiles[this.currentIndex]);
   }
 
+  showPreviousButton(): boolean {
+    return this.imageFiles.length > 1 && this.currentIndex > 0;
+  }
+
+  showNextButton(): boolean {
+    return (
+      this.imageFiles.length > 1 &&
+      this.currentIndex < this.imageFiles.length - 1
+    );
+  }
+
   previousImage() {
     this.currentIndex =
       (this.currentIndex - 1 + this.imageFiles.length) % this.imageFiles.length;
