@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { PublishService } from '../publish.service';
 
 @Component({
@@ -16,7 +17,10 @@ import { PublishService } from '../publish.service';
 export class AccountsPublishRootComponent {
   form: FormGroup;
 
-  constructor(private publishService: PublishService) {
+  constructor(
+    private publishService: PublishService,
+    private toastr: ToastrService
+  ) {
     this.form = new FormGroup(
       {
         text: new FormControl('', [Validators.required]),
@@ -29,7 +33,8 @@ export class AccountsPublishRootComponent {
   }
 
   async onSubmit() {
-    await this.publishService.publish(this.form.value);
+    this.toastr.error('Instagram has not yet provided access.', 'Error');
+    //await this.publishService.publish(this.form.value);
   }
 
   atLeastOneCheckedValidator(checkedFields: string[]): ValidatorFn {
