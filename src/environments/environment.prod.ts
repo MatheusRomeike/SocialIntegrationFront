@@ -1,5 +1,5 @@
 export const environment = {
   name: 'production',
   production: true,
-  apiUrl: 'https://localhost:5000',
+  apiUrl: 'https://app-rrbmwubknq-uc.a.run.app',
 };
