@@ -47,5 +47,9 @@
   "Others": "others",
   "Information-Sub-Title": "Fill in the form to create a new post. Select the platforms to share it on.",
   "Preview": "Preview",
-  "Post-Preview": "Post Preview"
+  "Post-Preview": "Post Preview",
+  "Configuration": "Configuration",
+  "ConnectYourAccount": "Connect your account",
+  "Connect": "Connect",
+  "Accounts-Sub-Title": "Connect your accounts to manage your posts."
 }

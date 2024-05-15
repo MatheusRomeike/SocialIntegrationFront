@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header px-4">
+    <h5 class="card-title">{{ "Accounts" | translate }}</h5>
+    <h6 class="card-subtitle mb-2 text-secondary">
+      {{ "Accounts-Sub-Title" | translate }}
+    </h6>
+  </div>
+  <div class="card-body">
+    <div class="row m-0 scrollable-row">
+      <app-social-network-card
+        class="col-12 col-md-4 col-lg-3"
+        *ngFor="let data of socialNetworks"
+        [data]="data"
+      ></app-social-network-card>
+    </div>
+  </div>
+</div>

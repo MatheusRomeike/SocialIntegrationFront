@@ -11,10 +11,6 @@ export const navbarData: INavbarData[] = [
     icon: 'account_tree',
     label: 'Accounts',
     items: [
-      // {
-      //   routeLink: 'accounts/manage',
-      //   label: 'Manage',
-      // },
       {
         routeLink: 'accounts/publish',
         label: 'Publish',
@@ -22,6 +18,10 @@ export const navbarData: INavbarData[] = [
       {
         routeLink: 'accounts/logs',
         label: 'Logs',
+      },
+      {
+        routeLink: 'accounts/configuration',
+        label: 'Configuration',
       },
     ],
   },

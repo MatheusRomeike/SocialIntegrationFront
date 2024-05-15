@@ -1,16 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { HttpBaseService } from 'src/app/shared/services/http-base.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PublishService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpBaseService) {}
 
   async publish(data) {
-    await firstValueFrom(
-      this.httpClient.post('https://localhost:5000/api/publish/publish', data)
-    );
+    await this.httpClient.post('publish/publish', data);
   }
 }

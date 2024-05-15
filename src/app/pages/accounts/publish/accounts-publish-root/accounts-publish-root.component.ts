@@ -33,7 +33,7 @@ export class AccountsPublishRootComponent {
   }
 
   async onSubmit() {
-    this.toastr.error('Instagram has not yet provided access.', 'Error');
+    this.toastr.error('Instagram account is not configurated.', 'Error');
     //await this.publishService.publish(this.form.value);
   }
 

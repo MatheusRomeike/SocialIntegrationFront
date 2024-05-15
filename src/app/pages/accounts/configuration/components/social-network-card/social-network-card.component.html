@@ -1,0 +1,37 @@
+<div class="card p-1">
+  <img
+    src="../../../../../../assets/images/brands/{{ data.name | lowercase }}.png"
+  />
+
+  <div class="mx-auto">
+    <img
+      [src]="
+        data.accounts != null
+          ? data.accounts[0].accountSocialNetworkId.avatar
+          : '../../../../../../assets/images/user-image.jpg'
+      "
+      class="rounded-circle"
+      style="width: 130px; margin-top: -5rem"
+    />
+  </div>
+
+  <div class="card-body d-flex flex-column align-items-center">
+    <h5 class="card-title">
+      {{
+        data.accounts != null
+          ? data.accounts[0].name
+          : ("ConnectYourAccount" | translate)
+      }}
+    </h5>
+    <a class="card-text" [href]="data.url" target="_blank">{{ data.name }}</a>
+    <div class="mt-3">
+      <button
+        type="button"
+        class="btn btn-dark btn-sm"
+        (click)="openConfiguration()"
+      >
+        <i class="fas fa-user-plus"></i> {{ "Connect" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

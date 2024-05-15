@@ -1,0 +1,17 @@
+.scrollable-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+@media (max-width: 576px) {
+  .scrollable-row {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: normal;
+  }
+}
