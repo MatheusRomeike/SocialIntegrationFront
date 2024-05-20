@@ -12,6 +12,17 @@ export class SocialNetworkCardComponent {
   constructor(private accountsService: AccountsService) {}
 
   openConfiguration() {
-    this.accountsService.initiateAuth();
+    let configuration = this.data.socialMediaConfiguration;
+    let url = `${configuration.authorizationUrl}?client_id=${
+      configuration.clientId
+    }&redirect_uri=${encodeURIComponent(
+      configuration.redirectUri
+    )}&response_type=${configuration.responseType}&scope=${encodeURIComponent(
+      configuration.scope
+    )}`;
+
+    console.log(url);
+
+    window.open(url, '_blank');
   }
 }

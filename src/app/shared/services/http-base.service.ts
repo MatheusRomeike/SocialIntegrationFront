@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 export class HttpBaseService {
   constructor(private httpClient: HttpClient) {}
 
-  getAll(url: string) {
+  get(url: string) {
     return firstValueFrom(
       this.httpClient.get(`${environment.apiUrl}/api/${url}`)
     ) as any;

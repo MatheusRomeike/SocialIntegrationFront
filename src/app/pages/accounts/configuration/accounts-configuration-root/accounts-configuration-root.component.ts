@@ -18,22 +18,19 @@ export class AccountsConfigurationRootComponent implements OnInit {
 
   @Loading()
   async load() {
-    // let socialNetworks = await this.accountsService.getSocialNetworksAsync();
-    // let socialNetworksConfigurated =
-    //   await this.accountsService.getSocialNetworksConfiguratedAsync();
+    let accounts = await this.accountsService.getAccountsAsync();
 
-    // socialNetworks = socialNetworks.map((x) => {
-    //   if (!socialNetworksConfigurated.includes((y) => (y.id = x.id))) return x;
-    // });
+    this.socialNetworks = await this.accountsService.getSocialMediasAsync();
 
-    //this.socialNetworks = [...socialNetworks, ...socialNetworksConfigurated];
+    this.socialNetworks = this.socialNetworks.map((socialNetwork) => {
+      let account = accounts.find(
+        (account) => account.socialMediaId === socialNetwork.id
+      );
 
-    this.socialNetworks = [
-      {
-        id: 1,
-        name: 'Instagram',
-        url: 'https://www.instagram.com',
-      },
-    ];
+      return {
+        ...socialNetwork,
+        account,
+      };
+    });
   }
 }
