@@ -51,5 +51,13 @@
   "Configuration": "Configuration",
   "ConnectYourAccount": "Connect your account",
   "Connect": "Connect",
-  "Accounts-Sub-Title": "Connect your accounts to manage your posts."
+  "Accounts-Sub-Title": "Connect your accounts to manage your posts.",
+  "ConfiguringAccount": "Configuring account",
+  "ConfiguringAccount-Sub-Title": "Configuring, don't close this window.",
+  "PleaseWaitForAccountConfiguration": "Please, wait for the account configuration.",
+  "Loading": "Loading",
+  "Disconnect": "Disconnect",
+  "DisconnectAccount": "Disconnect account",
+  "DisconnectAccount-Sub-Title": "Disconnecting account, don't close this window.",
+  "PleaseWaitForAccountDisconnection": "Please, wait for the account disconnection."
 }

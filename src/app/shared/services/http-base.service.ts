@@ -34,9 +34,9 @@ export class HttpBaseService {
     );
   }
 
-  delete(url: string, id: number) {
+  delete(url: string, id: any) {
     return firstValueFrom(
       this.httpClient.delete(`${environment.apiUrl}/api/${url}/${id}`)
-    );
+    ) as any;
   }
 }

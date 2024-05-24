@@ -51,5 +51,13 @@
   "Configuration": "Configuração",
   "ConnectYourAccount": "Conecte sua conta",
   "Connect": "Conectar",
-  "Accounts-Sub-Title": "Conecte suas contas para compartilhar suas postagens."
+  "Accounts-Sub-Title": "Conecte suas contas para compartilhar suas postagens.",
+  "ConfiguringAccount": "Configurando conta",
+  "ConfiguringAccount-Sub-Title": "Configurando, não feche esta janela.",
+  "PleaseWaitForAccountConfiguration": "Por favor, aguarde enquanto configuramos sua conta.",
+  "Loading": "Carregando",
+  "Disconnect": "Desconectar",
+  "DisconnectAccount": "Desconectar conta",
+  "DisconnectAccount-Sub-Title": "Desconectando, não feche esta janela.",
+  "PleaseWaitForAccountDisconnection": "Por favor, aguarde enquanto desconectamos sua conta."
 }

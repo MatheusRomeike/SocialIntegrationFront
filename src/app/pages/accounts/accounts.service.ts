@@ -14,4 +14,16 @@ export class AccountsService {
   async getAccountsAsync() {
     return (await this.httpClient.get('account')).data;
   }
+
+  async authenticateAsync(code, socialMediaName) {
+    return (
+      await this.httpClient.get(
+        `account/authenticateAsync?code=${code}&socialMediaName=${socialMediaName}`
+      )
+    ).data;
+  }
+
+  async disconnectAsync(socialMediaName) {
+    return (await this.httpClient.delete(`account`, `${socialMediaName}`)).data;
+  }
 }
