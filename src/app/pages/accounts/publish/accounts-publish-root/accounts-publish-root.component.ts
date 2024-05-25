@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { Loading } from 'src/app/shared/decorators/loading.decorator';
 import { PublishService } from '../publish.service';
 
 @Component({
@@ -34,6 +35,7 @@ export class AccountsPublishRootComponent {
     );
   }
 
+  @Loading()
   async onSubmit() {
     let data = {
       text: this.form.get('text').value,
