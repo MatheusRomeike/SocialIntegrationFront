@@ -7,13 +7,19 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthJwtService } from '../services/auth-jwt.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthJwtService) {}
+  constructor(
+    private authService: AuthJwtService,
+    private toastr: ToastrService,
+    private translate: TranslateService
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -40,6 +46,8 @@ export class HttpInterceptorService implements HttpInterceptor {
       }),
       catchError((error: any) => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
+          let message = this.translate.instant('Unauthorized');
+          this.toastr.error(message);
           this.authService.logout();
         }
         return throwError(error);

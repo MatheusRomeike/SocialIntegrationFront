@@ -8,6 +8,6 @@ export class PublishService {
   constructor(private httpClient: HttpBaseService) {}
 
   async publish(data) {
-    await this.httpClient.post('publish/publish', data);
+    return (await this.httpClient.post('socialMedia/publishAsync', data)).data;
   }
 }

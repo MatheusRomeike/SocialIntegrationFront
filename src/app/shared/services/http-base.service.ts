@@ -19,19 +19,19 @@ export class HttpBaseService {
   getById(url: string, id: number) {
     return firstValueFrom(
       this.httpClient.get(`${environment.apiUrl}/api/${url}/${id}`)
-    );
+    ) as any;
   }
 
   post(url: string, body: any) {
     return firstValueFrom(
       this.httpClient.post(`${environment.apiUrl}/api/${url}`, body)
-    );
+    ) as any;
   }
 
   put(url: string, body: any) {
     return firstValueFrom(
       this.httpClient.put(`${environment.apiUrl}/api/${url}`, body)
-    );
+    ) as any;
   }
 
   delete(url: string, id: any) {

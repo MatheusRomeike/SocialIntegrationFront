@@ -46,7 +46,7 @@ export function Loading(
           conteudo += `: ${translationService.instant(error.error.data)}`;
         }
 
-        toastrService.error(conteudo, titulo);
+        if (error?.status != 401) toastrService.error(conteudo, titulo);
       } finally {
         loadingService.hide();
       }

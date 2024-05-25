@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { PublishService } from '../publish.service';
 
@@ -19,12 +20,13 @@ export class AccountsPublishRootComponent {
 
   constructor(
     private publishService: PublishService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {
     this.form = new FormGroup(
       {
         text: new FormControl('', [Validators.required]),
-        photos: new FormControl([], Validators.required),
+        photos: new FormControl([]),
         x: new FormControl(false),
         instagram: new FormControl(false),
       },
@@ -33,8 +35,21 @@ export class AccountsPublishRootComponent {
   }
 
   async onSubmit() {
-    this.toastr.error('Instagram account is not configurated.', 'Error');
-    //await this.publishService.publish(this.form.value);
+    let data = {
+      text: this.form.get('text').value,
+      files: this.form.get('photos').value,
+      socialMediaTypes: [],
+    };
+
+    if (this.form.get('x').value) data.socialMediaTypes.push(1);
+    if (this.form.get('instagram').value) data.socialMediaTypes.push(2);
+
+    let result = await this.publishService.publish(data);
+    console.log(result);
+    if (result) {
+      let message = this.translate.instant('PublishedSuccessfully');
+      this.toastr.success(message);
+    }
   }
 
   atLeastOneCheckedValidator(checkedFields: string[]): ValidatorFn {

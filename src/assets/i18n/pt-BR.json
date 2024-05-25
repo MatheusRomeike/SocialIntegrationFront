@@ -59,5 +59,7 @@
   "Disconnect": "Desconectar",
   "DisconnectAccount": "Desconectar conta",
   "DisconnectAccount-Sub-Title": "Desconectando, não feche esta janela.",
-  "PleaseWaitForAccountDisconnection": "Por favor, aguarde enquanto desconectamos sua conta."
+  "PleaseWaitForAccountDisconnection": "Por favor, aguarde enquanto desconectamos sua conta.",
+  "Unauthorized": "Não autorizado",
+  "PublishedSuccessfully": "Publicado com sucesso"
 }

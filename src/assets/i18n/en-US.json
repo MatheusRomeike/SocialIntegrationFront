@@ -59,5 +59,7 @@
   "Disconnect": "Disconnect",
   "DisconnectAccount": "Disconnect account",
   "DisconnectAccount-Sub-Title": "Disconnecting account, don't close this window.",
-  "PleaseWaitForAccountDisconnection": "Please, wait for the account disconnection."
+  "PleaseWaitForAccountDisconnection": "Please, wait for the account disconnection.",
+  "Unauthorized": "Unauthorized",
+  "PublishedSuccessfully": "Published successfully"
 }
