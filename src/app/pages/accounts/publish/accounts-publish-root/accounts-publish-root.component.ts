@@ -30,8 +30,15 @@ export class AccountsPublishRootComponent {
         photos: new FormControl([]),
         x: new FormControl(false),
         instagram: new FormControl(false),
+        facebook: new FormControl(false),
       },
-      { validators: this.atLeastOneCheckedValidator(['x', 'instagram']) }
+      {
+        validators: this.atLeastOneCheckedValidator([
+          'x',
+          'instagram',
+          'facebook',
+        ]),
+      }
     );
   }
 
@@ -45,6 +52,7 @@ export class AccountsPublishRootComponent {
 
     if (this.form.get('x').value) data.socialMediaTypes.push(1);
     if (this.form.get('instagram').value) data.socialMediaTypes.push(2);
+    if (this.form.get('facebook').value) data.socialMediaTypes.push(3);
 
     let result = await this.publishService.publish(data);
     console.log(result);
